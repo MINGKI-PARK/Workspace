@@ -1,7 +1,7 @@
 # Workspace
 My workspace!
 
-프로젝트 등 뭐든!
+
 
 ### project
 + sillim tasty road!
@@ -17,7 +17,6 @@ My workspace!
 
 
 
-### books
+### lab
 
-
-
++ 코홀트 분석 with 파이썬
