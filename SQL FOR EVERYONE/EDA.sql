@@ -1,3 +1,11 @@
+SELECT *
+FROM all_tables;
+
+SELECT *
+FROM tabs;
+
+SELECT * FROM COLS WHERE TABLE_NAME = 'customer';
+
 SELECT COUNT(*) 전체주문건, 
        SUM(B.sales) 총매출, 
        AVG(B.sales) 평균매출, 
