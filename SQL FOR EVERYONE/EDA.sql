@@ -6,6 +6,8 @@ FROM tabs;
 
 SELECT * FROM COLS WHERE TABLE_NAME = 'customer';
 
+
+--특징 통계 값 계산하기
 SELECT COUNT(*) 전체주문건, 
        SUM(B.sales) 총매출, 
        AVG(B.sales) 평균매출, 
