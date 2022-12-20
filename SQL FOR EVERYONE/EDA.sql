@@ -44,3 +44,5 @@ AND B.item_id = C.item_id
 AND A.cancel = 'N'
 GROUP BY C.item_id, C.product_name
 ORDER BY SUM(B.sales) DESC;
+
+
