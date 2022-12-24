@@ -46,3 +46,6 @@ GROUP BY C.item_id, C.product_name
 ORDER BY SUM(B.sales) DESC;
 
 
+
+
+
