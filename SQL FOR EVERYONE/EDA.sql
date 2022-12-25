@@ -46,8 +46,21 @@ GROUP BY C.item_id, C.product_name
 ORDER BY SUM(B.sales) DESC;
 
 
+--시계열 분석: 월별 상품 매출 분석
+--분석 4 모든 상품의 월별 매출액 출력
 
+SELECT SUBSTR(A.reserv_date, 1, 6) 매출월,
+       SUM(DECODE(B.item_id, 'M0001', B.sales, 0)) SPECIAL_SET,
+       SUM(DECODE(B.item_id, 'M0002', B.sales, 0)) PASTA,
+       SUM(DECODE(B.item_id, 'M0003', B.sales, 0)) PIZZA,
+       SUM(DECODE(B.item_id, 'M0004', B.sales, 0)) SEA_FOOD,
+       SUM(DECODE(B.item_id,
 
+FROM reservation A, order_info B
+WHERE A.reserv_no = B.reserv_no
+AND A.cancel = 'N'
+GROUP BY SUBSTR(A.reserv_date, 1, 6)
+ORDER BY SUBSTR(A.reserv_date, 1, 6);
 
 
 
