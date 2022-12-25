@@ -68,5 +68,17 @@ GROUP BY SUBSTR(A.reserv_date, 1, 6)
 ORDER BY SUBSTR(A.reserv_date, 1, 6);
 
 
+--시계열 분석: 월별 매출 분석
+--분석 5 월별 총 매출액과 전용 상품 매출액 출력
+
+SELECT SUBSTR(A.reserv_date, 1, 6) 매출액,
+       SUM(B.sales) 총매출,
+       SUM(DECODE(B.item_id, 'M0001', B.sales, 0)) 전용상품매출
+FROM reservation A, order_info B
+WHERE A.reserv_no = B.reserv_no
+AND A.cancel = 'N'
+GROUP BY SUBSTR(A.reserv_date, 1, 6)
+ORDER BY SUBSTR(A.reserv_date, 1, 6);
+
 
 
