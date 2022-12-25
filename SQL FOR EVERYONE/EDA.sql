@@ -81,4 +81,9 @@ GROUP BY SUBSTR(A.reserv_date, 1, 6)
 ORDER BY SUBSTR(A.reserv_date, 1, 6);
 
 
+--산술 계산: 매출 기여율 추가
+--분석 6 분석5에 매출 기여율 추가. 기여율은 소수점 아래 두 번째 자리에서 반올림.
+
+SELECT SUBSTR(A.reserv_date, 1, 6) 매출월,
+       SUM(b.sales)
 
