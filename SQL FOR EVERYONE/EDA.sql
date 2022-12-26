@@ -87,3 +87,5 @@ ORDER BY SUBSTR(A.reserv_date, 1, 6);
 SELECT SUBSTR(A.reserv_date, 1, 6) 매출월,
        SUM(b.sales)
 
+
+
