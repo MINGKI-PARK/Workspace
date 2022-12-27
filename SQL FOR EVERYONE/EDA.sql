@@ -85,7 +85,14 @@ ORDER BY SUBSTR(A.reserv_date, 1, 6);
 --분석 6 분석5에 매출 기여율 추가. 기여율은 소수점 아래 두 번째 자리에서 반올림.
 
 SELECT SUBSTR(A.reserv_date, 1, 6) 매출월,
-       SUM(b.sales)
+       SUM(B.sales) - SUM(decode(B.item_id, 'M0001', B.sales, 0)) 전용상품외매출,
+       SUM(decode(B.item_id, 'M0001', B.sales,0)) 전용상품매출,
+       ROUND(SUM(DECODE(B.item_id, 'M0001', B.sales, 0))/SUM(B.sales)*100, 1) 매출기여율
+       
+FROM rservation A, order_info B
+WHERE A.reserv_no = B.reserv_no
+AND A.cancel = 'N'
+GROUP BY
 
 
 
