@@ -96,7 +96,16 @@ GROUP BY SUBSTR(A.reserv_date, 1, 6)
 ORDER BY SUBSTR(A.reserv_date, 1, 6);
 
 
+--외부 조인: 부족한 데이터 처리
+--분석 7 분석 6에 총 예약 건수, 예약 취소 건수를 추가해 보세요.
 
+SELECT SUBSTR(A.resrv_date, 1, 6) 매출월,
+       SUM(B.sales) 총매출,
+       SUM(B.sales) - SUM(DECODE(B.item_id, 'M0001', B.sales, 0)) 전용상품외매출,
+       SUM(DECODE(B.item_id, 'M0001', B.sales, 0)) 전용상품매출,
+       ROUND(SUM(DECODE(B.item_id, 'M0001', B.sales, 0))/SUM(B.sales)*100, 1) 매출기여율,
+       COUNT(A.reserv_no) 총예약건,
+       SUM(DECODE(
 
 
 
