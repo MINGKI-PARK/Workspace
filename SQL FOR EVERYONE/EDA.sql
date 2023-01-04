@@ -132,5 +132,10 @@ ORDER BY SUBSTR(A.reserv_date, 1, 6);
 --데이터 처리: 날짜 가공하기, 문자 붙이기
 --분석 8 분석7에 총 매출 대비 전용 상품의 판매율, 총 예약 건 대비 예약 취소율을 추가. 소수점이 나올 경우 소수점 아래 두 번째에서 반올림하여 출력.
 
+SELECT SUBSTR(A.reserv_date, 1, 6) 매출월,
+       SUM(B.sales) 총매출,
+       SUM(B.sales) - SUM(DECODE(B.item_id, 'M0001', B.sales, 0)) 전용상품외매출,
+       SUM(DECODE(B.item_id, 'M0001', B.sales, 0)) 전용상품매출,
+       ROUND(SUM(DECODE(B.item_id, 'M0001', B.sales, 0)) / SUM(B.sales) * 100, 1)||'%' 전용상품판매율,
 
 
