@@ -177,3 +177,13 @@ FROM
 GROUP BY SUBSTR(reserv_date, 1, 6), A.product_name
 ORDER BY SUBSTR(reserv_date, 1, 6);
 
+
+--순위 분석: 월별 전용 상품 최대 실적 지점 확인하기
+--분석10 월별 전용 상품 매출 1위부터 3위까지 지점이 어디인지 확인
+
+SELECT  * 
+FROM (
+        SELECT SUBSTR(A.reserv_date, 1, 6) 매출월,
+        A.branch 지점,
+        SUM(B.sales) 전용상품매출,
+        RANK() OVER(PARTITION BY
