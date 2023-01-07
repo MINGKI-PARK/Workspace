@@ -239,4 +239,11 @@ FROM(
                ROUND(SUM(DECODE(B.item_id, 'M0001', B.sales, 0)) / SUM(B.sales) * 100, 1) || '%' 전용상품판매율,
                COUNT(A.reserv_no) 총예약건,
                SUM(DECODE(A.cancel, 'N', 1, 0)) 예약완료건,
-               
+               SUM(DECODE(A.cacnel, 'Y', 1, 0)) 예약취소건,
+               ROUND(SUM(DECODE(A.cacnel, 'Y', 1, 0)) / COUNT(A.reserv_no) * 100, 1) || '%' 예약취소율,
+               '' 최대매출지점,
+               0 지점매출액
+         FROM reservation A, order_info B
+         WHERE A.reserv_no = B.reserv_no(+)
+         GROUP BY SUBSTR(A.reserv_date, 1, 6), '', 0
+         
