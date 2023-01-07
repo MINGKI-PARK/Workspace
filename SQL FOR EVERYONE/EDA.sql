@@ -246,4 +246,20 @@ FROM(
          FROM reservation A, order_info B
          WHERE A.reserv_no = B.reserv_no(+)
          GROUP BY SUBSTR(A.reserv_date, 1, 6), '', 0
-         
+UNION
+    SELECT A.매출월,
+           0 총매출,
+           0 전용상품외매출,
+           0 전용상품매출,
+           '' 전용상품판매율,
+           0 총예약건,
+           0 예약완료건,
+           0 예약취소건,
+           '' 예약취소율,
+           A.지점 최대매출지점,
+           A.전용상품매출 지점매출액
+    FROM (
+            SELECT SUBSTR(A.reserv_date, 1, 6) 매출월,
+                   A.branch 지점,
+                   SUM(B.sales) 전용상품매출,
+                   
