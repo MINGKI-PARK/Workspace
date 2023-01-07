@@ -218,4 +218,25 @@ WHERE A.지점순위 = 1;
 
 
 --종합 리포트 만들기
+--분석11 분석8의 결과와 분석10의 결과 항목을 월별로 합쳐서 리포트 만들기
 
+SELECT A.매출월 매출월,
+       MAX(총매출) 총매출,
+       MAX(전용상품외매출) 전용상품외매출,
+       MAX(전용상품매출) 전용상품매출,
+       MAX(전용상품판매율) 전용상품판매율,
+       MAX(총예약건) 총예약건,
+       MAX(예약완료건) 예약완료건,
+       MAX(예약취소건) 예약취소건,
+       MAX(예약취소율) 예약취소율,
+       MAX(최대매출지점) 최대매출지점,
+       MAX(지점매출액) 지점매출액
+FROM(
+        SELECT SUBSTR(A.reserv_date, 1, 6) 매출월,
+               SUM(B.sales) 총매출,
+               SUM(B.sales) - SUM(DECODE(B.item_id, 'M0001' B.sales, 0)) 전용상품외매출,
+               SUM(DECODE(B.item_id, 'M0001' B.sales, 0)) 전용상품매출,
+               ROUND(SUM(DECODE(B.item_id, 'M0001', B.sales, 0)) / SUM(B.sales) * 100, 1) || '%' 전용상품판매율,
+               COUNT(A.reserv_no) 총예약건,
+               SUM(DECODE(A.cancel, 'N', 1, 0)) 예약완료건,
+               
