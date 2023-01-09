@@ -280,6 +280,9 @@ FROM (
 GROUP BY A.매출월
 ORDER BY A.매출월;
                    
+                   
+                   
+                   
 
 
 
