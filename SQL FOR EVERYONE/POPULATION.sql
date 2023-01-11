@@ -1,6 +1,10 @@
 --1. 인구 특징 통계 분석
 --분석12 고객의 수, 남녀 숫자, 평균 나이, 평균 거래 기간을 출력
 
+SELECT *
+FROM customer;
+
+
 SELECT COUNT(customer_id) 고객수,
        SUM(DECODE(sex_code, 'M', 1, 0)) 남자,
        SUM(DECODE(sex_code, 'F', 1, 0)) 여자,
@@ -9,5 +13,3 @@ SELECT COUNT(customer_id) 고객수,
 FROM customer;
 
 
-SELECT *
-FROM customer;
