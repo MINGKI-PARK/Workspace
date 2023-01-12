@@ -34,3 +34,20 @@ SELECT first_name,
        DECODE(department_id, 60, '10%인상', '미인상') 인상여부
 FROM employees
 ORDER BY department_id;
+
+
+--CASE
+SELECT employee_id,
+       first_name,
+       last_name,
+       salary,
+       CASE
+            WHEN salary >= 9000 THEN '상위급여'
+            WHEN salary BETWEEN 6000 AND 8999 THEN '중위급여'
+            ELSE '하위급여'
+       END 급여등급
+FROM employees
+WHERE job_id = 'IT_PROG';
+
+
+--RANK, DENSE_RANK, ROW_NUMBER: 데이터 값에 순위 매기기
