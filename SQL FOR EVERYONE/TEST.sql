@@ -51,3 +51,69 @@ WHERE job_id = 'IT_PROG';
 
 
 --RANK, DENSE_RANK, ROW_NUMBER: 데이터 값에 순위 매기기
+SELECT employee_id,
+       salary,
+       RANK() OVER(ORDER BY salary DESC) RANK_급여,
+       DENSE_RANK() OVER(ORDER BY salary DESC) DENSE_RANK_급여,
+       ROW_NUMBER() OVER(ORDER BY salary DESC) ROW_NUMBER_급여
+FROM employees;
+
+
+SELECT *
+FROM employees;
+
+SELECT first_name,
+       last_name,
+       job_id,
+       RANK() OVER(PARTITION BY job_id ORDER BY salary DESC) 랭크,
+       ROW_NUMBER() OVER(PARTITION BY job_id ORDER BY salary)
+FROM employees
+ORDER BY job_id;
+
+SELECT *
+FROM 
+    (
+        SELECT first_name,
+               last_name,
+               job_id,
+               RANK() OVER(PARTITION BY job_id ORDER BY salary DESC) 랭크,
+               ROW_NUMBER() OVER(PARTITION BY job_id ORDER BY salary) 로우
+        FROM employees
+        ORDER BY job_id
+    )
+WHERE 랭크 < 4;
+
+
+SELECT *
+FROM
+    (
+        SELECT employee_id,
+               RANK() OVER(PARTITION BY job_id ORDER BY salary DESC) 랭크
+               
+        FROM employees
+    )
+WHERE RN <=3;
+
+SELECT employee_id,
+       RANK() OVER(PARTITION BY job_id ORDER BY salary DESC) 랭크
+FROM employees;
+
+
+
+SELECT job_id,
+       last_name,
+       salary
+FROM 
+    (
+        SELECT job_id,
+               first_name,
+               last_name,
+               salary,
+               RANK() OVER(PARTITION BY job_id ORDER BY salary DESC) 랭크,
+               ROW_NUMBER() OVER(PARTITION BY job_id ORDER BY salary) 로우
+        FROM employees
+        ORDER BY job_id, salary DESC
+    )
+WHERE 랭크 < 4;
+
+
