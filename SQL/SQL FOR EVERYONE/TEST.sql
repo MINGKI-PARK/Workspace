@@ -120,8 +120,17 @@ WHERE 랭크 < 4;
 SELECT *
 FROM employees;
 
-SELECT job_id,
-       SUM(salary)
-FROM employees
-GROUP BY job_id
-ORDER BY SUM(salary) DESC;
+
+SELECT *
+FROM
+    (
+        SELECT job_id,
+               SUM(salary) salarys
+        FROM employees
+        GROUP BY job_id
+        ORDER BY salarys DESC, job_id
+    )
+WHERE ROWNUM <= 10;
+
+--쿼리가 실행되는 순서는
+--FROM - WHERE - GROUP BY - SELECT - ORDER BY
