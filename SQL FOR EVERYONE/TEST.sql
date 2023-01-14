@@ -117,3 +117,11 @@ FROM
 WHERE 랭크 < 4;
 
 
+SELECT *
+FROM employees;
+
+SELECT job_id,
+       SUM(salary)
+FROM employees
+GROUP BY job_id
+ORDER BY SUM(salary) DESC;
