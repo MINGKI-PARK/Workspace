@@ -27,8 +27,14 @@ WHERE A.product_id = B.product_id
 ORDER BY total DESC, product_id;
 
 #우유와 요거트가 담긴 장바구니
-
-
+SELECT cart_id
+FROM cart_products
+WHERE name = 'Milk'
+AND cart_id IN (SELECT cart_id
+                FROM cart_products
+                WHERE name = 'Yogurt')
+GROUP BY cart_id
+ORDER BY cart_id;
 
 
 
