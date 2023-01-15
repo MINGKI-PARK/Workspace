@@ -36,6 +36,9 @@ AND cart_id IN (SELECT cart_id
 GROUP BY cart_id
 ORDER BY cart_id;
 
+#년, 월, 성별 별 상품 구매 회원 수 구하기
+
+
 
 
 
