@@ -46,7 +46,3 @@ ORDER BY cart_id;
 
 
 
-
-
-
-
